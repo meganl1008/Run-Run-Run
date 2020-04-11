@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Boston Marathon Analysis</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- added Plotly -->
+    <!-- OR use a specific plotly.js release (e.g. version 1.52.3) -->
+    <script type="text/javascript" src="https://cdn.plot.ly/plotly-1.52.3.js" charset="utf-8"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 jumbotron text-center">
+        <h1>Boston Marathon Analysis</h1>
+        <p>Based off 2017 Results</p>
+      </div>
+    </div>
+
+    <img class="img-responsive" src="{{url_for('static', filename='./images/cover.png')}}", alt = "cover photo" style="height: 650px; width: 100%">
+   
+  <div class = "container">
+    <div class = "row">
+      <h4>The Boston Marathon is one of the most popular and competitive races in the world. It is typically held on Patriots' Day and its course runs 
+      from Hopkinton in southern Middlesex Country to Copley Square in Boston. The event attracts 500,000 spectators each year, 
+      making it New England's most widely viewed sporting event. The event now attracts an average of about 30,000 
+      registered participants each year, with over 30,000 individuals entering the race. This dashboard is to help provide insights and trends 
+      on previous runners to inform prospective runners on what to expect based off past performances.</h4>
+
+      <h5>The following analysis is based off 2017 results from:</h5><a href="http://registration.baa.org/2017/cf/Public/iframe_ResultsSearch.cfm">Official Boston Marathon Site</a>
+      <h5>There were a total of 26,410 participants recorded. The available data provided: participant full name, official finish time, age, gender, country, state, city.</h5>
+    </div>
+  </div>
+</div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div id="plot"></div>  
+      </div>
+      <div class="col-md-6">
+        <div id="plot_2"></div> 
+      </div>
+    </div>
+  </div>
+
+  <div class = "container">
+    <div class = "row">
+      <div class = "col-md-6">
+        <div id="myDiv3"></div>
+      </div>
+      <div class = "col-md-6">
+        <div id="plot_3"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class = "container">
+    <div class = "row">
+        <div id="myDiv"></div>
+    </div>
+  </div>
+
+  <div class = "container">
+    <div class = "row">
+        <div id="myDiv2"></div>
+    </div>
+  </div>
+
+  <div class = "container">
+    <div class = "row text-center">
+      <a href="/map">
+        <h1>Click Here to Go to Map</h1>
+      </a>
+    </div>
+  </div>
+  
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 jumbotron text-center">
+      <h2>API Routes:</h2>
+      <a href="/api/runners">Boston Marathon 2017 API</a> <br>
+      <a href="/api/runners/us">Boston Marathon 2017 USA Runners API</a> <br>
+      <a href="/api/runners/foreign">Boston Marathon 2017 Foreign Runners API</a> <br>
+      <a href="/api/runners/male">Boston Marathon 2017 Male Runners API</a> <br>
+      <a href="/api/runners/female">Boston Marathon 2017 Female Runners API</a><br>
+      <a href="/api/runners/top_male">Boston Marathon 2017 Top 50 Male Runners API</a><br>
+      <a href="/api/runners/top_female">Boston Marathon 2017 Top 50 Female Runners API</a><br>
+      </div>
+    </div>
+  </div>
+  
+    <!-- <ul>
+        <li>
+            <h4>
+                
+                
+            </h4>
+            <h4></h4>
+            <h4></h4>
+        </li>
+    </ul> -->
+    
+</body>
+
+<script type="text/javascript">
+  var groupNames = {{group_names | tojson}}
+  var numberOfRunnerByAge = {{ number_of_runner_by_age | tojson }} 
+  var femaleTimes = {{ female_times | tojson }}
+  var maleTimes = {{ male_times | tojson }}
+  var top50MaleNames = {{ top_50_male_names | tojson }}
+  var top50MaleTimes = {{ top_50_male_times | tojson }}
+  var ranking = {{ ranking | tojson }}
+  var top50MaleAge = {{ top_50_male_age | tojson}}
+  var top50MaleCountry = {{ top_50_male_country | tojson}}
+  var top50FemaleNames = {{ top_50_female_names | tojson }}
+  var top50FemaleTimes = {{ top_50_female_times | tojson }}
+  var top50FemaleAge = {{ top_50_female_age | tojson}}
+  var top50FemaleCountry = {{ top_50_female_country | tojson}}
+  var countryType = {{ country_count | tojson }}
+  var internationalTimes = {{ international_times | tojson }}
+  var usaTimes = {{ usa_times | tojson }}
+
+</script>
+
+
+<script type="text/javascript" src="{{url_for('static', filename='./js/plot.js')}}"></script>
+
+</html>
